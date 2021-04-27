@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Simon dice</title>
+</head>
+<body>
+  <div class="container">
+    <div class="container__header">
+      <input class="input niveles" type="text" name="nivel" id="niveles" placeholder="No. niveles" value="1">
+    </div>
+    <div class="container__gameboard">
+      <div id="celeste" class="card color celeste left" data-color="celeste"></div>
+      <div id="violeta" class="card color violeta right" data-color="violeta"></div>
+      <div id="naranja" class="card color naranja left" data-color="naranja"></div>
+      <div id="verde" class="card color verde right" data-color="verde"></div>
+      <div id="rojo" class="card color rojo right" data-color="rojo"></div>
+      <div id="negro" class="card color negro right" data-color="negro"></div>
+      <button id="btnEmpezar" class="btn-start" onclick="empezarJuego()">Empezar a jugar!</button>
+    </div>
+  </div>
+  <div class="score">
+    <div class="score__level">
+      <p class="tag">Nivel: </p>
+      <p id="levelValue" class="value">0</p>
+    </div>
+    <div class="score__score">
+      <p class="tag">score: </p>
+      <p id="scoreValue" class="value">0</p>
+    </div>
+    <div class="score__maxlevel">
+      <p class="tag">Max score: </p>
+      <p id="maxScoreValue" class="value">0</p>
+
+      <p class="tag">Max nivel: </p>
+      <p id="maxLevelValue" class="value">0</p>
+    </div>
+  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" 
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" 
+      crossorigin="anonymous"></script>
+    <script src="./js/simon-dice.js"></script>
+  </body>
+</html>
