@@ -128,39 +128,43 @@ class Juego {
         this.nivel++;
         this.eliminarClickEvent();
         if (this.nivel === numNiveles + 1) {
-          maxScore = score;
-          this.displayMaxs();
           this.gano();
         } else {
           this.saveScoreReached();
           setTimeout(() => {
             this.siguienteNivel();
-            //this.generarSecuencia();
           }, 1500);
         }
       }
     } else {
-      document.getElementById("levelValue").innerHTML = "1";
       this.perdio();
     }
   }
 
   gano() {
-    swal("Simon dice", "Ganaste el juego", "success").then(this.inicializar);
+    swal("Simon dice", "Ganaste el juego", "success")
+      .then((onResponse) => {
+        this.inicializar();
+        maxScore = score;
+        score = 0;
+        this.displayMaxs();
+      });
   }
 
   perdio() {
     swal("Simon dice", "Perdiste el juego mi mai :(", "error").then(() => {
       this.eliminarClickEvent();
       this.inicializar();
+      document.getElementById("levelValue").innerHTML = 1;
+      document.getElementById("scoreValue").innerHTML = 0;
     });
   }
 
   displayMaxs() {
     document.getElementById("maxScoreValue").innerHTML = maxScore;
-    document.getElementById("maxLevelValue").innerHTML = this.nivel - 1;
+    document.getElementById("maxLevelValue").innerHTML = this.subnivel;
     document.getElementById("scoreValue").innerHTML = 0;
-    document.getElementById("levelValue").innerHTML = 0;
+    document.getElementById("levelValue").innerHTML = 1;
   }
 
   saveScoreReached() {
@@ -184,28 +188,29 @@ function validateLevel(nivelChose) {
   let levelOK = false;
   if (nivelChose) {
     if (isNaN(Number(nivelChose))) {
-      swal('Simon dice', 'Escriba un nivel valido', 'error')
-      .then(() => clearInput());
-    } if (Number(nivelChose) === 0) {
-      swal('Simon dice', 'Escriba un nivel valido', 'error')
-      .then(() => clearInput());
-    }else {
+      swal("Simon dice", "Escriba un nivel valido", "error").then(() =>
+        clearInput()
+      );
+    }
+    if (Number(nivelChose) === 0) {
+      swal("Simon dice", "Escriba un nivel valido", "error").then(() =>
+        clearInput()
+      );
+    } else {
       levelOK = true;
     }
   } else {
-    swal('Simon dice', 'Escriba un nivel valido', 'error')
-    .then(() => clearInput());
+    swal("Simon dice", "Escriba un nivel valido", "error").then(() =>
+      clearInput()
+    );
   }
   return levelOK;
 }
 
 function empezarJuego() {
-  let nivelChose = document.getElementById('niveles').value;
+  let nivelChose = document.getElementById("niveles").value;
   if (validateLevel(nivelChose)) {
     numNiveles = Number(nivelChose);
     window.juego = new Juego();
   }
-  
 }
-
-
